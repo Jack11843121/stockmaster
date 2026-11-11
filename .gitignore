@@ -1,0 +1,18 @@
+# 依赖与构建产物
+node_modules/
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# 运行时私有数据（勿提交）
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+llm-config.json
+jack-logo.png
+
+# 系统/编辑器
+.DS_Store
+.mv.db
+.tmp-*

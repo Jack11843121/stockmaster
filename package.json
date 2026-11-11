@@ -1,0 +1,36 @@
+{
+  "name": "@local/dsh-stock-dashboard",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "description": "股票大师 StockMaster — 一站式 A股/港股智能投研终端：涨跌停扫描、连板/反转概率、右侧机会挖掘、涨停板策略回测、宏观研判、AI 对话投顾与自选持仓。",
+  "license": "MIT",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "lib/*.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-sidebar"
+      ]
+    }
+  }
+}

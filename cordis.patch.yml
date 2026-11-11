@@ -1,0 +1,3 @@
+- insert:
+    - id: dsh-stock-dashboard
+      name: '@local/dsh-stock-dashboard'
