@@ -20,32 +20,60 @@ StockMaster 是一个 DeepSeek Harness（Cordis）插件，运行在你的 Harne
 | 🗂️ **自选持仓** | 自定义跟踪股票，实时行情 + AI 点评 |
 | ⚙️ **自带大模型 Key** | 支持 OpenAI 兼容接口（DeepSeek / 通义 / OpenAI / Moonshot…），填入你的 Key 即可完全自托管 |
 
-## 🚀 安装
+## 🚀 安装（快速开始）
 
-把本目录作为 bundle 安装到你的 Harness profile：
+### 前置要求
 
+- 已安装 **DeepSeek Harness（DSH）** 桌面版或 Web 版（本插件挂载在它的左侧菜单区）。
+- DSH 自带的 Node 版本需 **≥ 22.5**（插件用到 Node 内置 `node:sqlite`，22.5 以下会加载失败）。
+- **无需任何行情数据 Key**：行情来自东方财富公开接口；只有「AI 分析」默认用 DSH 内置模型，也可自配 Key（见下文）。
+
+### 第 1 步：下载源码
+
+```bash
+git clone https://github.com/Jack11843121/stockmaster.git
+cd stockmaster
 ```
-plugin_manager install_bundle <本目录绝对路径>
+
+### 第 2 步：安装 bundle
+
+把整个目录作为 bundle 安装进 DSH。任选一种方式：
+
+**方式 A · 让 Agent 帮你装（最省事）**
+在 DSH 里新建一个对话，对 Agent 说：
+
+> 请安装这个插件 bundle：`/你克隆到的绝对路径/stockmaster`
+
+Agent 会执行 `plugin_manager install_bundle` 完成安装。
+
+**方式 B · Web GUI 插件页**
+打开 DSH 左侧「插件」页面 → 安装（Install）→ 输入/选择本地目录 `stockmaster` 的绝对路径，确认安装。
+
+**方式 C · 命令行（若你的 dsh 支持）**
+```bash
+plugin_manager install_bundle /绝对路径/stockmaster
 ```
 
-或通过 Harness Web GUI 的「插件」页面安装。依赖零外部数据源（行情来自东方财富公开接口，无需密钥）。
+### 第 3 步：打开看板
 
-## 🔑 配置你的大模型（可选）
+安装完成后**刷新页面**，左侧菜单会出现「**股票大师**」入口，点进去即可。
 
-StockMaster 默认使用 Harness 内置的 Agent 模型；你也可以接入自己的 Key，让 AI 分析完全走你自己的模型：
+### 第 4 步（可选）· 配置你自己的大模型 Key
 
-1. 打开看板 → 顶部「**模型配置**」。
-2. 填入 API 地址（如 `https://api.deepseek.com`）、模型名（如 `deepseek-chat`）、API Key。
-3. 保存即可；AI 分析与宏观研判将改用你的模型，失败时自动回退内置模型。
+默认 AI 分析用 DSH 内置模型；想完全自托管就配自己的 Key：
 
-配置保存在数据目录的 `llm-config.json`（请勿提交到 Git，见 `.gitignore`）。
+1. 看板顶部点「**模型配置**」；
+2. 填 API 地址（如 `https://api.deepseek.com`）、模型名（如 `deepseek-chat`）、API Key；
+3. 保存。AI 分析与宏观研判即走你的模型，失败自动回退内置。
+
+> 支持任何 OpenAI 兼容接口：DeepSeek、通义千问、Moonshot、智谱、OpenAI 等。
 
 ## 📁 数据目录
 
 - 默认：`~/.stockmaster`
 - 可用环境变量覆盖：`STOCK_DASHBOARD_DATA_DIR=/path/to/dir`
 
-数据包含行情快照、报告、SQLite 历史库（`dashboard.db`）等，均为运行时生成。
+数据包含行情快照、报告、SQLite 历史库（`dashboard.db`）等，均为运行时生成，已加入 `.gitignore`。
 
 ## 🧩 技术栈
 
